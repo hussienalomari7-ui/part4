@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chapter 3 – Searching Part 2 | 100 MCQ Practice</title>
+<style>
+:root{--bg:#0b1020;--panel:#121a2d;--panel2:#172238;--text:#edf2ff;--muted:#aab6cf;--line:#2a3854;--blue:#78aaff;--green:#39c98a;--greenbg:#103b30;--red:#ff727b;--redbg:#451e2b;--gold:#ffd166;--shadow:0 18px 50px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(1100px 600px at 15% -10%,#1c3154 0%,transparent 58%),var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55}
+.wrap{max-width:1060px;margin:0 auto;padding:28px 18px 60px}.hero{padding:26px 28px;border:1px solid var(--line);border-radius:22px;background:linear-gradient(135deg,rgba(39,70,116,.65),rgba(18,26,45,.96));box-shadow:var(--shadow)}.eyebrow{font-size:.78rem;letter-spacing:.13em;text-transform:uppercase;color:#a9c6ff;font-weight:800}.hero h1{font-size:clamp(1.7rem,4vw,2.6rem);line-height:1.12;margin:9px 0 10px}.hero p{color:#c2cee5;margin:8px 0}.pillrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.pill{font-size:.8rem;border:1px solid #3d5276;color:#d4e2ff;border-radius:999px;padding:5px 11px;background:#172744}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.stat{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:13px 15px}.stat .label{font-size:.76rem;color:var(--muted)}.stat .value{font-size:1.45rem;font-weight:800;font-variant-numeric:tabular-nums}.stat.correct .value{color:var(--green)}.stat.wrong .value{color:var(--red)}.stat.unanswered .value{color:var(--gold)}.progress-shell{height:10px;background:#202c42;border-radius:99px;overflow:hidden;margin:8px 0 6px}.progress{height:100%;width:0;background:linear-gradient(90deg,#4e8df6,#39c98a);transition:width .25s}.progress-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:.8rem}
+.card{margin-top:18px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,28px);box-shadow:var(--shadow)}.qtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.tag{font-size:.76rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#bdd4ff;background:#1d3151;border:1px solid #34527f;padding:5px 10px;border-radius:999px}.qnumber{color:var(--muted);font-size:.9rem;font-weight:700}.question{font-size:1.25rem;font-weight:750;line-height:1.42;margin:18px 0 14px}.qhint{font-size:.86rem;color:var(--muted);margin-top:-5px;margin-bottom:14px}.diagram{margin:16px 0 18px;padding:12px;background:#f7f8fc;border-radius:14px;color:#182033;border:1px solid #cbd5e1}.diagram img{display:block;max-width:100%;max-height:310px;object-fit:contain;margin:auto;border-radius:8px}.diagram figcaption{font-size:.78rem;color:#44516a;text-align:center;margin-top:8px}.diagram a{color:#1d55aa}.fallback{display:none;padding:4px}.fallback svg{display:block;max-width:100%;height:auto;margin:auto}.options{display:grid;gap:10px;margin-top:16px}.option{width:100%;display:flex;gap:12px;align-items:flex-start;text-align:left;background:var(--panel2);border:1px solid #30405d;border-radius:13px;color:var(--text);padding:13px 15px;font-size:.98rem;cursor:pointer;transition:.16s}.option:hover:not(:disabled){border-color:#78aaff;background:#1b2b47;transform:translateY(-1px)}.letter{flex:0 0 27px;width:27px;height:27px;border-radius:8px;background:#263753;color:#dce8ff;display:grid;place-items:center;font-weight:850;font-size:.83rem}.option.correct{background:var(--greenbg);border-color:var(--green);color:#dcfff0}.option.correct .letter{background:var(--green);color:#06271a}.option.wrong{background:var(--redbg);border-color:var(--red);color:#ffe6e8}.option.wrong .letter{background:var(--red);color:#32070c}.option:disabled{cursor:default;opacity:1}.feedback{display:none;margin-top:16px;padding:15px 16px;border-radius:13px;border:1px solid var(--line);background:#17243a}.feedback.show{display:block}.feedback.good{border-color:#298e66;background:#10352b}.feedback.bad{border-color:#a94c5b;background:#3a1b27}.feedback-title{font-weight:850;margin-bottom:5px}.feedback.good .feedback-title{color:#68e5ac}.feedback.bad .feedback-title{color:#ff9299}.explanation{color:#d3dced;font-size:.93rem}.controls{display:flex;gap:10px;justify-content:space-between;align-items:center;margin-top:20px;flex-wrap:wrap}.btn{border:1px solid #46618d;background:#203757;color:#f3f7ff;padding:10px 16px;border-radius:11px;font-weight:800;cursor:pointer}.btn:hover:not(:disabled){filter:brightness(1.15)}.btn.primary{background:#3477dc;border-color:#5290ed}.btn.secondary{background:transparent;border-color:#40516f;color:#cbd7ec}.btn:disabled{opacity:.35;cursor:not-allowed}.keyhint{font-size:.78rem;color:var(--muted)}
+.result{display:none}.result.show{display:block}.result h2{margin-top:0}.scoregrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.scorebox{border:1px solid var(--line);border-radius:14px;padding:15px;background:#172238}.scorebox strong{display:block;font-size:1.8rem}.scorebox small{color:var(--muted)}.scorebox.good strong{color:var(--green)}.scorebox.bad strong{color:var(--red)}.scorebox.skip strong{color:var(--gold)}.review{margin-top:20px}.review-item{border-top:1px solid var(--line);padding:13px 0}.review-item b{color:#ff9aa1}.source-note{color:var(--muted);font-size:.8rem;margin-top:20px}.footer{margin-top:22px;color:var(--muted);font-size:.82rem;text-align:center}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.scoregrid{grid-template-columns:1fr}.hero{padding:21px}.question{font-size:1.1rem}.controls .btn{flex:1}.diagram{padding:7px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">AI · Chapter 3 · Searching Part 2</div>
+    <h1>100 Multiple-Choice Practice Questions</h1>
+    <p>Uninformed Search • BFS • Uniform-Cost Search • DFS • Depth-Limited Search • Iterative Deepening • Bidirectional Search • Repeated States</p>
+    <p>Practice mode: choose one answer to receive immediate feedback. Your correct, incorrect, and unanswered scores update as you go.</p>
+    <div class="pillrow"><span class="pill">100 Questions</span><span class="pill">English Questions & Options</span><span class="pill">Instant Feedback</span><span class="pill">Graph Tracing</span></div>
+  </header>
+
+  <section class="stats" aria-label="Live score">
+    <div class="stat"><div class="label">Answered</div><div class="value" id="answered">0 / 100</div></div>
+    <div class="stat correct"><div class="label">Correct</div><div class="value" id="correct">0 · 0%</div></div>
+    <div class="stat wrong"><div class="label">Incorrect</div><div class="value" id="wrong">0 · 0%</div></div>
+    <div class="stat unanswered"><div class="label">Unanswered</div><div class="value" id="unanswered">100 · 100%</div></div>
+  </section>
+  <div class="progress-meta"><span id="progressText">Question 1 of 100</span><span id="progressPct">1%</span></div>
+  <div class="progress-shell"><div class="progress" id="progress"></div></div>
+
+  <main id="quiz" class="card">
+    <div class="qtop"><span class="tag" id="topic">Foundations</span><span class="qnumber" id="qnumber">Question 1 / 100 · Slides 2–3</span></div>
+    <div class="question" id="question"></div>
+    <div class="qhint" id="hint"></div>
+    <div id="diagram"></div>
+    <div class="options" id="options"></div>
+    <div class="feedback" id="feedback" aria-live="polite"></div>
+    <div class="controls">
+      <button class="btn secondary" id="prev">← Previous</button>
+      <span class="keyhint">You can move back and review answered questions.</span>
+      <button class="btn primary" id="next">Next question →</button>
+    </div>
+  </main>
+
+  <section id="result" class="card result">
+    <div class="eyebrow">Practice complete</div>
+    <h2>Your Results</h2>
+    <p id="resultSummary"></p>
+    <div class="scoregrid">
+      <div class="scorebox good"><strong id="finalCorrect">0</strong><small>Correct · % of all 100</small></div>
+      <div class="scorebox bad"><strong id="finalWrong">0</strong><small>Incorrect · % of all 100</small></div>
+      <div class="scorebox skip"><strong id="finalSkipped">0</strong><small>Unanswered · % of all 100</small></div>
+    </div>
+    <div class="controls"><button class="btn primary" id="reviewBtn">Review incorrect answers</button><button class="btn secondary" id="restart">Restart all 100 questions</button></div>
+    <div class="review" id="review"></div>
+  </section>
+
+  <div class="source-note">
+    Source basis: the attached 61-slide Chapter 3 PDF, “Solving Problems by Searching – Part 2 (Uninformed Search)”. External reference diagrams are linked to their hosting educational pages; the practice questions and answer keys are original.
+    <br>Arithmetic note: Slide 50 contains small addition discrepancies in its printed IDS/BFS totals; the quiz uses the mathematically correct sums of the displayed terms.
+  </div>
+  <div class="footer">Study carefully. Focus on the reasoning behind each answer, not only the answer letter.</div>
+</div>
+
+<script>
+const diagrams = {
+  bfs: {
+    url: "https://image.slidesharecdn.com/problemsolvingthroughsearch-uninformedsearch2-241224124251-146d4425/75/Problem-Solving-through-Search-Uninformed-Search-5-2048.jpg",
+    source: "https://www.slideshare.net/slideshow/problem-solving-through-search-uninformed-search/274355443",
+    alt: "Undirected graph with nodes A, B, C, D, E, F, G and multiple connections, used for BFS/DFS traversal.",
+    fallback: `<svg viewBox="0 0 520 230" role="img" aria-label="Fallback BFS graph"><g stroke="#334155" stroke-width="3" fill="none"><path d="M65 110L175 45L300 45L425 110M65 110L175 180M65 110L235 110M175 45L235 110M300 45L235 110M300 45L300 180M235 110L175 180M235 110L300 180M300 180L425 110"/></g><g fill="#dbeafe" stroke="#1d4ed8" stroke-width="2"><circle cx="65" cy="110" r="20"/><circle cx="175" cy="45" r="20"/><circle cx="300" cy="45" r="20"/><circle cx="175" cy="180" r="20"/><circle cx="235" cy="110" r="20"/><circle cx="300" cy="180" r="20"/><circle cx="425" cy="110" r="20"/></g><g fill="#10213d" font-size="18" font-weight="700" text-anchor="middle" dominant-baseline="middle"><text x="65" y="110">A</text><text x="175" y="45">B</text><text x="300" y="45">C</text><text x="175" y="180">D</text><text x="235" y="110">E</text><text x="300" y="180">F</text><text x="425" y="110">G</text></g></svg>`
+  },
+  ucs: {
+    url: "https://cdn.educba.com/academy/wp-content/uploads/2020/03/Algorithm-1.png",
+    source: "https://www.educba.com/uniform-cost-search/",
+    alt: "Weighted directed graph for Uniform-Cost Search with start S and goal nodes G2 and G3, with edge costs.",
+    fallback: `<svg viewBox="0 0 540 260" role="img" aria-label="Fallback weighted UCS graph"><g stroke="#334155" stroke-width="2.5" fill="none"><path d="M55 130L190 55M55 130L190 205M190 55L335 55M190 55L335 130M190 205L335 130M335 55L470 55M335 130L470 205"/></g><g fill="#fff" stroke="#2563eb" stroke-width="2"><circle cx="55" cy="130" r="23"/><circle cx="190" cy="55" r="22"/><circle cx="190" cy="205" r="22"/><circle cx="335" cy="55" r="22"/><circle cx="335" cy="130" r="22"/></g><g fill="#dcfce7" stroke="#16a34a" stroke-width="2"><circle cx="470" cy="55" r="25"/><circle cx="470" cy="205" r="25"/></g><g font-size="16" font-weight="700" fill="#10213d" text-anchor="middle" dominant-baseline="middle"><text x="55" y="130">S</text><text x="190" y="55">D</text><text x="190" y="205">C</text><text x="335" y="55">E</text><text x="335" y="130">F</text><text x="470" y="55">G3</text><text x="470" y="205">G2</text></g><g font-size="15" fill="#b91c1c" font-weight="800"><text x="112" y="78">6</text><text x="112" y="183">6</text><text x="258" y="42">2</text><text x="256" y="91">2</text><text x="258" y="180">7</text><text x="402" y="42">7</text><text x="402" y="185">8</text><text x="245" y="147">5</text></g></svg>`
+  },
+  bi: {
+    url: "https://www.educative.io/api/edpresso/shot/6199751998963712/image/5139040078135296",
+    source: "https://www.educative.io/answers/how-to-use-bidirectional-search-implementation-in-python",
+    alt: "Bidirectional search graph showing forward and backward frontiers meeting at intersection node 9.",
+    fallback: `<svg viewBox="0 0 520 180" role="img" aria-label="Fallback bidirectional search diagram"><g stroke="#475569" stroke-width="3" fill="none"><path d="M45 90L135 42L225 90L295 90L385 42L475 90"/></g><g fill="#bfdbfe" stroke="#2563eb" stroke-width="2"><circle cx="45" cy="90" r="20"/><circle cx="135" cy="42" r="20"/><circle cx="225" cy="90" r="20"/></g><g fill="#bbf7d0" stroke="#16a34a" stroke-width="2"><circle cx="385" cy="42" r="20"/><circle cx="475" cy="90" r="20"/></g><circle cx="295" cy="90" r="22" fill="#fde68a" stroke="#ca8a04" stroke-width="3"/><g fill="#172033" font-size="16" font-weight="800" text-anchor="middle" dominant-baseline="middle"><text x="45" y="90">S</text><text x="135" y="42">4</text><text x="225" y="90">8</text><text x="295" y="90">9</text><text x="385" y="42">11</text><text x="475" y="90">G</text></g><g fill="#334155" font-size="12" text-anchor="middle"><text x="295" y="135">Intersection</text></g></svg>`
+  },
+  course: {
+    url: null,
+    source: null,
+    alt: "Weighted graph S-A 2, S-B 5, A-C 2, A-D 4, C-D 3, D-G 2, B-G 5.",
+    fallback: `<svg viewBox="0 0 560 245" role="img" aria-label="Weighted graph for course UCS example"><g stroke="#334155" stroke-width="3" fill="none"><path d="M55 122L175 55M55 122L175 190M175 55L300 35M175 55L315 122M300 35L315 122M315 122L470 122M175 190L470 122"/></g><g fill="#e0edff" stroke="#2563eb" stroke-width="2.5"><circle cx="55" cy="122" r="23"/><circle cx="175" cy="55" r="23"/><circle cx="175" cy="190" r="23"/><circle cx="300" cy="35" r="23"/><circle cx="315" cy="122" r="23"/></g><circle cx="470" cy="122" r="25" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/><g fill="#10213d" font-weight="800" font-size="17" text-anchor="middle" dominant-baseline="middle"><text x="55" y="122">S</text><text x="175" y="55">A</text><text x="175" y="190">B</text><text x="300" y="35">C</text><text x="315" y="122">D</text><text x="470" y="122">G</text></g><g fill="#b91c1c" font-size="16" font-weight="900"><text x="103" y="73">2</text><text x="105" y="174">5</text><text x="235" y="34">2</text><text x="242" y="83">4</text><text x="310" y="80">3</text><text x="390" y="110">2</text><text x="328" y="183">5</text></g></svg>`
+  }
+};
+
+const Q=(topic,slides,q,opts,a,why,img=null,hint="")=>({topic,slides,q,opts,a,why,img,hint});
+const questions=[
+Q("Foundations","2","Which statement best describes an Uninformed Search strategy?",["It uses a heuristic estimate to choose the direction of the goal.","It uses no information about the likely direction of the goal.","It always expands the node with the lowest heuristic value.","It knows the complete path to the goal before searching."],1,"Uninformed Search is also called blind search: it has no information about which non-goal state is more promising."),
+Q("Foundations","2","Informed Search is also known as which type of search?",["Blind search","Uniform-cost search","Heuristic search","Iterative search"],2,"The slides identify Informed Search as Heuristic Search because it uses domain information to guide the search toward the goal."),
+Q("Foundations","2","What is the main difference between Informed and Uninformed Search?",["Informed Search uses additional domain guidance; Uninformed Search uses only the problem definition.","Uninformed Search always uses less memory than Informed Search.","Informed Search always guarantees an optimal solution.","Uninformed Search cannot use a queue."],0,"The central distinction is whether information about the likely direction of the goal is available."),
+Q("Foundations","2","Which of the following is listed as an Informed Search method in the chapter?",["Breadth-First Search","Uniform-Cost Search","Depth-Limited Search","A* Search"],3,"The informed methods listed include Hill Climbing, Best-First, Greedy, Beam, A, and A*."),
+Q("Complexity","3","Why is Big-O analysis more useful than reporting that an algorithm took 1 hour on one laptop?",["It gives the exact runtime on every computer.","It abstracts away from machine-specific implementation details and describes growth.","It measures only the amount of source code.","It guarantees the average-case runtime."],1,"Big-O characterizes how resource use grows with problem size, rather than depending on one machine's speed."),
+Q("Complexity","3","The slide's definition of Time(n) = O(f(n)) says that, for sufficiently large n, Time(n) is bounded by:",["A constant multiple of f(n)","The square root of f(n) only","Exactly f(n) seconds","A fixed constant independent of f(n)"],0,"The slide states Time(n) < constant × f(n) for n > n0, for some n0."),
+Q("Complexity","3","What does Worst-Case Analysis examine?",["The most favorable input only","The maximum resource demand among relevant cases","The average of all possible runtimes","The memory used by the operating system"],1,"Worst-case analysis studies the most demanding case, while average-case analysis studies expected behavior across cases."),
+Q("Evaluation Criteria","5","Completeness asks which question?",["Does the algorithm find the cheapest path?","How many nodes fit in memory?","Is the search tree balanced?","Is the algorithm guaranteed to find a solution when one exists?"],3,"Completeness concerns whether a solution is guaranteed to be found when one exists."),
+Q("Evaluation Criteria","5","Optimality asks whether the algorithm:",["Finds the optimal or best solution","Always visits nodes alphabetically","Uses a FIFO queue","Avoids all repeated states"],0,"Optimality is about the quality of the solution, not merely whether some solution is found."),
+Q("General Tree Search","6","What is the Fringe (Frontier)?",["The set of goal states only","The set of nodes generated and waiting to be expanded","The set of all states that have already been expanded","The final solution path"],1,"The fringe/frontier contains candidate nodes awaiting expansion."),
+Q("General Tree Search","7","What does EXPAND do?",["Checks whether the current state is a goal","Deletes all repeated states","Generates all successor nodes of a given node","Calculates only the final path cost"],2,"EXPAND generates the successors of the node being processed."),
+Q("General Tree Search","7","What is the purpose of GOAL-TEST?",["To sort the frontier by depth","To generate every possible action","To store all explored states","To test whether a state satisfies the goal conditions"],3,"GOAL-TEST checks whether the current state meets the goal conditions."),
+Q("General Tree Search","7","The QUEUEING-FUNCTION is used to:",["Maintain a ranked list of candidate nodes for expansion","Calculate the branching factor only","Convert states into actions","Remove the goal test from search"],0,"The queueing function determines how candidate nodes in the frontier are organized and selected."),
+Q("Queueing Function","8","Which queueing policy produces Breadth-First Search?",["LIFO","FIFO","Priority by heuristic value","Random selection"],1,"FIFO (First In, First Out) produces BFS."),
+Q("Queueing Function","8","Which queueing policy produces Depth-First Search?",["FIFO","Priority by path cost","LIFO","Sorted by node name"],2,"LIFO (Last In, First Out) produces DFS; newly generated successors are placed at the front."),
+Q("Queueing Function","8","A fringe ordered by the path cost so far produces:",["Breadth-First Search","Depth-First Search","Depth-Limited Search","Uniform-Cost Search"],3,"UCS uses a priority queue sorted by accumulated path cost."),
+Q("Queueing Function","8","Which statement about Iterative Deepening Search matches the slide?",["It uses Depth-First Search with increasing depth limits.","It uses only a priority queue sorted by heuristic.","It always uses bidirectional expansion.","It expands the most expensive node first."],0,"IDS repeatedly runs depth-first search with an increasing depth bound."),
+Q("BFS","10","Breadth-First Search expands which node first?",["The deepest unexpanded node","The node with the greatest path cost","The node with the smallest heuristic estimate","The shallowest unexpanded node"],3,"BFS selects the shallowest node that has not yet been expanded."),
+Q("BFS","10–13","In BFS, where are newly generated successors inserted?",["At the end of the FIFO queue","At the front of the queue","Into a stack below the root","Into a priority queue by cost"],0,"BFS uses FIFO; new successors are appended at the end."),
+Q("BFS Graph Traversal","14","In the graph below, start at A. Treat edges as undirected and examine each node's neighbors in alphabetical order. What is the BFS visit order?",["A, B, C, E, D, F, G","A, B, D, E, C, F, G","A, D, E, B, F, C, G","A, E, B, C, F, G, D"],1,"Starting at A, enqueue B, D, E. Then process B (discover C), D, E (discover F), C (discover G), F, G. The visit order is A, B, D, E, C, F, G.","bfs","Assume an undirected graph and alphabetical neighbor order. Use the order in which nodes are removed from the queue."),
+Q("BFS Queue Trace","10–13","Using the same graph, after expanding A and then expanding B, what is the queue if A's neighbors are B, D, E and B's new undiscovered neighbor is C?",["[C, D, E]","[D, E, C]","[E, C, D]","[B, D, E, C]"],1,"After expanding A the queue is [B, D, E]. Remove B, then append its new child C: [D, E, C]."),
+Q("DFS Graph Traversal","29–40","Using the graph below, start at A, treat edges as undirected, and explore neighbors alphabetically. What is the DFS visit order?",["A, B, D, E, C, F, G","A, D, B, C, E, F, G","A, B, C, E, D, F, G","A, E, F, G, C, B, D"],2,"Depth-first alphabetical exploration follows A → B → C → E → D, backtracks to E, then visits F → G. The order is A, B, C, E, D, F, G.","bfs","This is the same undirected example graph as the BFS question. Assume alphabetical neighbor order; focus on depth-first backtracking."),
+Q("BFS Properties","15","Under the chapter's assumption, BFS is complete when:",["The tree has an infinite branching factor","The branching factor b is finite","All edge costs are different","The goal is at infinite depth"],1,"Slide 15 states BFS is complete if b is finite."),
+Q("BFS Complexity","15","What is the time complexity given for BFS in the chapter?",["O(bm)","O(b^d)","O(b^(d+1))","O(log b)"],2,"The slide gives O(b^(d+1)) for the number of nodes generated."),
+Q("BFS Complexity","15","What is the space complexity given for BFS?",["O(b^(d+1))","O(bm)","O(b^d) only","O(1)"],0,"BFS keeps many nodes in memory, either in the frontier or on paths leading to it, giving O(b^(d+1))."),
+Q("BFS Optimality","15","BFS is optimal under which condition stated in the slides?",["When all paths have different costs","When the branching factor is zero","When a heuristic is available","When step costs are equal, such as step-cost = 1"],3,"BFS finds the shallowest solution. That is also the least-cost solution when step costs are equal."),
+Q("BFS Limitations","15–16","What is highlighted as the bigger practical problem for BFS?",["It cannot use a queue","Its memory requirements","It cannot test for a goal","It never finds shallow solutions"],1,"The slides emphasize that BFS memory requirements are a bigger problem than execution time."),
+Q("BFS vs UCS","15, 18","A graph has two routes to the goal: one uses 2 steps costing 20 total; another uses 3 steps costing 6 total. Which claim about BFS is correct?",["BFS is guaranteed to choose the 6-cost route","BFS always minimizes path cost, regardless of edge weights","BFS chooses the route with the smallest edge weight","BFS may choose the 2-step route even though it costs more"],3,"BFS prioritizes depth, not accumulated cost. With unequal step costs it is not generally optimal."),
+Q("UCS","18","What is the defining selection rule of Uniform-Cost Search?",["Expand the deepest node","Expand the node with the smallest accumulated path cost g(n)","Expand the node with the greatest number of successors","Expand the shallowest node regardless of cost"],1,"UCS selects the frontier node with the lowest path cost so far, g(n)."),
+Q("UCS","18","What does g(n) represent in Uniform-Cost Search?",["Estimated distance remaining to the goal","Depth of node n","Accumulated cost from the start node to n","Number of successors of n"],2,"g(n) is the cost of the path from the root/start to the current node."),
+Q("UCS Implementation","26","Which data structure is used by UCS to order the fringe?",["FIFO queue","LIFO stack","Unordered list only","Priority queue ordered by path cost"],3,"The fringe is a priority queue ordered by the accumulated path cost."),
+Q("UCS Graph Trace","19–25","In the course graph below, what is the least-cost path from S to G?",["S → A → D → G","S → A → C → D → G","S → B → G","S → A → C → G"],0,"Costs: S-A-D-G = 2+4+2=8; S-A-C-D-G = 2+2+3+2=9; S-B-G = 5+5=10. The least cost is 8.","course","Assume the weighted connections shown. Add every edge cost along a complete route; choose the smallest total."),
+Q("UCS Calculation","19–25","In the course graph, after expanding S, which frontier entries are generated?",["A with cost 5 and B with cost 2","A with cost 2 and B with cost 5","A with cost 2 and B with cost 7","A with cost 0 and B with cost 5"],1,"The edges from S have costs 2 to A and 5 to B, so the initial priority queue is A(2), B(5)."),
+Q("UCS Calculation","19–25","After expanding A in the course example, what are the cumulative costs of C and D?",["C = 2, D = 4","C = 2, D = 6","C = 4, D = 6","C = 5, D = 7"],2,"The path to A costs 2. A→C costs 2, so C costs 4; A→D costs 4, so D costs 6."),
+Q("UCS Goal Test","18–26","A goal node is generated with path cost 12, but another frontier path may still produce a goal with cost 8. What should UCS do?",["Stop as soon as the goal is generated","Return the first goal path regardless of cost","Switch to DFS","Continue; stop when a goal is removed from the priority queue as the lowest-cost frontier node"],3,"Generating a goal does not prove it is optimal. UCS terminates when the goal is selected as the lowest-cost frontier path, under the required cost assumptions."),
+Q("UCS Optimality","26","According to Slide 26, UCS is complete if:",["Every step cost is at least some positive ε","All step costs are exactly 1","The search tree has depth 1","The goal is the first generated node"],0,"The slide states step cost ≥ ε; without a positive lower bound, zero-cost or arbitrarily small cycles can cause nontermination."),
+Q("UCS Complexity","26","The slide characterizes UCS time by the number of nodes whose path cost is:",["Exactly equal to the goal depth","Less than or equal to the optimal solution cost","Greater than the optimal solution cost only","Equal to the branching factor"],1,"The slide states that UCS time depends on the number of nodes with path cost no greater than the optimal solution cost."),
+Q("UCS Complexity","26","The slide characterizes UCS space by the number of nodes on paths whose path cost is:",["Greater than every goal cost","Exactly equal to ε","Less than or equal to the optimal solution cost","Independent of path cost"],2,"The UCS space description is cost-based: nodes on paths with cost no greater than the optimal solution cost."),
+Q("UCS and BFS","26","When all step costs are equal, UCS is equivalent to which algorithm?",["DFS","Greedy Best-First Search","Bidirectional Search only","BFS"],3,"With equal step costs, cumulative path cost increases uniformly with depth, so UCS behaves like BFS."),
+Q("Dijkstra","27","In the AI community, the algorithm called Uniform-Cost Search is commonly called what in theoretical computer science?",["Dijkstra's algorithm","Kruskal's algorithm","A* Search","Depth-Limited Search"],0,"Slide 27 identifies Dijkstra's algorithm and Uniform-Cost Search as names used in different communities for this path-cost search."),
+Q("UCS Concepts","18, 27","Why is Uniform-Cost Search still classified as Uninformed Search?",["It never calculates path cost","It uses the actual cost so far, but not an estimate of the remaining distance to the goal","It always expands the shallowest node","It uses a goal-distance heuristic"],1,"UCS uses g(n), the accumulated cost so far. It does not use a heuristic estimate of the remaining distance h(n)."),
+Q("UCS Graph Reference","18, 26","In the weighted graph below, what is the cost of the route S → C → G2?",["6","8","11","13"],2,"The depicted route uses S→C with cost 6 and C→G2 with cost 5. Total = 6+5=11.","ucs","Read the edge costs along S → C → G2 and add them. The image is a reference weighted graph from EDUCBA."),
+Q("UCS Priority Queue","18, 26","A UCS frontier contains A(9), B(4), C(7), and D(5). Which node is expanded next?",["A","C","D","B"],3,"UCS removes the entry with the smallest path cost. B has cost 4."),
+Q("DFS","29","Depth-First Search expands which node first?",["The shallowest unexpanded node","The node with the lowest path cost","The deepest unexpanded node","The oldest node in the queue"],2,"DFS selects the deepest unexpanded node."),
+Q("DFS Implementation","29–30","Which queue behavior implements DFS in the slides?",["FIFO, successors at the end","Priority queue by path cost","Sorted queue by heuristic","LIFO, successors inserted at the front"],3,"DFS uses LIFO and places successors at the front of the fringe."),
+Q("DFS Queue Trace","30–31","If the DFS queue is [B, C] and expanding B generates D and E, what is the new queue under the slide's convention?",["[D, E, C]","[C, D, E]","[B, C, D, E]","[E, C, D]"],0,"DFS puts new successors at the front; with D then E generated, the queue becomes [D, E, C]."),
+Q("DFS Concepts","29–40","What does Backtracking mean in DFS?",["Increasing the depth limit by one","Returning to a previous node when the current branch has no unexplored successors","Sorting frontier nodes by cost","Restarting at the goal node"],1,"DFS returns to the nearest earlier node with an unexplored branch after finishing a branch."),
+Q("DFS Completeness","43","Why is ordinary DFS not complete in an infinite-depth search space?",["It cannot generate successors","It always chooses the most expensive path","It may continue forever down one branch without reaching a goal elsewhere","It stores every possible state"],2,"A branch may be infinite, preventing DFS from backtracking to another branch that contains a solution."),
+Q("DFS Complexity","43","What is the time complexity stated for DFS?",["O(b^m)","O(b^(d+1))","O(bd)","O(b^(d/2))"],0,"DFS time is O(b^m), where m is the maximum depth."),
+Q("DFS Symbols","43","In the DFS complexity expression O(b^m), what does m represent?",["Depth of the shallowest solution","Maximum depth of the search tree","Minimum path cost","Number of goal states"],1,"The slide explicitly defines m as maximum depth."),
+Q("DFS Comparison","43–44","Why can DFS perform poorly when m is much larger than d?",["It cannot use a stack","It must sort every edge by cost","It may explore a very deep, unhelpful branch even though a shallower solution exists","It always stores the whole tree"],2,"A very large maximum depth can make DFS spend a long time in deep branches; d denotes the shallowest solution depth."),
+Q("DFS Complexity","43","What is the space complexity stated for DFS?",["O(b^(d+1))","O(b^d)","O(b^m)","O(bm)"],3,"DFS needs to remember a current path plus unexplored nodes, giving O(bm) space."),
+Q("DFS Memory","43","Why is DFS described as using linear space in the slide?",["It stores one current path plus expanded but unexplored nodes","It stores every node in the full search tree","It stores all possible states globally","It stores a complete breadth level"],0,"The slide explains that DFS remembers a single path and the unexplored nodes branching from it."),
+Q("DFS Optimality","43","Which statement about DFS optimality is correct?",["It is always optimal if b is finite","It is not optimal because it may find a non-optimal goal first","It is optimal whenever the goal exists","It is optimal only with a priority queue"],1,"DFS follows depth-first order, not cost or shallowest-goal order, so the first goal need not be optimal."),
+Q("BFS vs DFS","44","When is BFS generally preferable to DFS?",["When memory is extremely limited and a deep solution is known","When the tree has an infinite left branch and no goal test","When a shallowest solution is required and step costs are equal","When only the deepest branch matters"],2,"BFS is complete under finite branching and optimal for equal step costs, so it is preferable when a shallow/least-step solution is needed."),
+Q("BFS vs DFS","43–44","When might DFS outperform BFS?",["When every edge has a different cost and cost optimality is required","When the branching factor is infinite","When all solutions are guaranteed to be at depth zero","When memory is limited or a solution is found early along the selected deep branch"],3,"DFS uses much less memory and can find a solution quickly if its explored branch reaches one early."),
+Q("Depth-Limited Search","45","What change does Depth-Limited Search make to DFS?",["It replaces depth with path cost","It sets a maximum depth L beyond which nodes are not expanded","It starts from the goal","It switches to FIFO"],1,"DLS is DFS with a depth limit L."),
+Q("Depth-Limited Search","45","With a depth limit L = 2, what is the deepest level that can be tested by the search?",["Depth 0 only","Depth 1 only","Depth 2","Depth 3"],2,"Nodes at depth 2 can be reached and goal-tested, but they are not expanded to produce depth-3 nodes."),
+Q("Depth-Limited Search","45","If a node is at the depth limit and is not a goal, what does DLS do?",["Expands its children anyway","Changes into UCS","Stops the entire algorithm permanently","Does not expand that node beyond the limit"],3,"DLS does not expand nodes beyond the specified depth bound."),
+Q("Depth-Limited Search","45","A solution exists at depth 5, but a DLS run uses L = 2. What happens?",["That run cannot reach the solution","It will always find the solution at depth 2","It changes automatically to BFS","It expands to depth 5 despite the limit"],0,"A depth-limited run cannot reach a goal deeper than its current limit."),
+Q("Iterative Deepening","45–49","What sequence of depth limits is shown in the IDS slides?",["3, 2, 1, 0","0, 1, 2, 3","1, 3, 5, 7","0, 2, 4, 8"],1,"Slides 46–49 illustrate L=0, then 1, then 2, then 3."),
+Q("Iterative Deepening","45–49","At the beginning of each new IDS iteration, where does the search start?",["From the last frontier node","From the deepest node visited previously","From the root/initial state again","From the goal node"],2,"Each iteration restarts depth-first search from the initial state with a larger depth limit."),
+Q("DLS Counting","50","For branching factor b and depth d, which expression counts the nodes in one depth-limited search through depth d in a full tree?",["b^0 + b^1 + … + b^d","(d+1)b^d only","b^(d+1) − 1 only, regardless of b","(d+1) + b"],0,"A single DLS explores each level once, so the total is the sum b^0 through b^d."),
+Q("IDS Counting","50","In the IDS node-count formula, why is the coefficient of b^0 equal to d+1?",["The root has d+1 children","The root is generated in every depth-limit iteration from 0 through d","The root is generated only once per child","The root is counted as a goal at every level"],1,"The root appears in all d+1 iterations, from limit 0 through limit d."),
+Q("IDS Calculation","50","For b = 10 and d = 5, what is the arithmetic sum of the IDS terms printed in Slide 50: 6 + 50 + 400 + 3,000 + 20,000 + 100,000?",["111,111","123,450","111,100","123,456"],3,"Adding the displayed terms gives 123,456. The slide prints 123,450, which is a small arithmetic typo."),
+Q("IDS Complexity","50–51","What time complexity is given for IDS?",["O(b^d)","O(b^(d+1))","O(b^m)","O(bd)"],0,"The repeated upper-level work does not change the exponential order; the slide gives O(b^d)."),
+Q("IDS Repeated Work","52","Why is regenerating upper-level nodes in IDS usually not too costly?",["Upper-level nodes are never revisited","Most nodes in a roughly uniform search tree are at the bottom level","The branching factor becomes zero","The goal is always at the root"],1,"The bottom level contains most nodes, so repeating the small upper levels adds relatively little work."),
+Q("IDS Completeness","51","Under the usual finite-branching, finite-solution-depth assumption, IDS is:",["Incomplete","Only optimal when a heuristic is available","Complete","Unable to find a goal"],2,"The properties slide marks IDS as complete."),
+Q("IDS Optimality","51","Under which condition does the chapter say IDS is optimal?",["All paths have different arbitrary costs","The goal is at maximum depth","The branching factor is infinite","Step cost is 1 or increases with depth"],3,"The slide states IDS is optimal if step cost = 1 or is an increasing function of depth."),
+Q("IDS Selection","51","When does the chapter recommend Iterative Deepening in general?",["When the search space is large and solution depth is unknown","When every edge has a different negative cost","When the goal is already known to be the root","When memory is unlimited and all goals are at the deepest level"],0,"Slide 51 recommends IDS when the search space is large and the depth of the solution is not known."),
+Q("IDS Space","51","What space complexity does the slide give for IDS?",["O(b^(d+1))","O(bd)","O(b^m)","O(b^d)"],1,"IDS inherits DFS's linear-space advantage; the slide states O(bd)."),
+Q("IDS vs BFS","50–52","Which statement best summarizes IDS compared with BFS?",["IDS never repeats a node and uses exactly the same space as BFS","BFS always uses less time and less space","IDS repeats some upper-level work but has linear space and O(b^d) time in the slide's analysis","IDS is neither complete nor optimal"],2,"IDS repeats upper levels, but the repetition is relatively cheap; it retains linear space and time O(b^d)."),
+Q("Bidirectional Search","53","What is the central idea of Bidirectional Search?",["Search forward from S and backward from G simultaneously","Search only from the goal toward the start","Expand the most expensive node first","Search only at the shallowest level from S"],0,"Bidirectional search launches one search from the start and another from the goal."),
+Q("Bidirectional Search","53–54","What event causes a bidirectional search to identify a connecting solution?",["The forward frontier becomes empty","The two search frontiers/interior explored sets intersect","The start node is expanded twice","The backward search reaches infinite depth"],1,"The searches stop when their explored/open sets meet at a common state, allowing the paths to be joined."),
+Q("Bidirectional Search","53","What information is required to search backward from a goal state?",["A heuristic value for every edge","The depth of every node","A way to specify the predecessors of the goal","A FIFO queue only"],2,"Backward search needs a way to determine predecessor states that can lead into the goal."),
+Q("Bidirectional Search","53","Why can backward search be difficult in a problem such as chess checkmate?",["Chess has no states","Chess always has one legal move","The start state is unknown","It may be difficult to enumerate all predecessor states of checkmate"],3,"The slide explicitly uses predecessors of checkmate as an example of the difficulty of backward search."),
+Q("Bidirectional Search","53","Which situation is identified as a challenge for Bidirectional Search?",["There are multiple goal states","The branching factor is exactly two","There is one initial state","All step costs are one"],0,"Multiple possible goals make it harder to decide where to initiate and maintain the backward search."),
+Q("Bidirectional Search","53","Why can a goal test with no explicit list of goal states make Bidirectional Search difficult?",["It prevents forward search","There may be no explicit goal state from which to begin the backward search","It forces the queue to be LIFO","It makes the branching factor zero"],1,"Backward search needs a concrete goal state or set of goal states to generate predecessors from."),
+Q("Bidirectional Complexity","55","What time complexity is shown for Bidirectional Search?",["O(b^d)","O(b^(d+1))","O(b^(d/2))","O(bm)"],2,"Each side searches approximately half the solution depth, producing O(b^(d/2)) in the slide."),
+Q("Bidirectional Complexity","55","What space complexity is shown for Bidirectional Search?",["O(bd)","O(b^m)","O(b^(d+1))","O(b^(d/2))"],3,"The slide gives the same asymptotic order for time and space: O(b^(d/2))."),
+Q("Bidirectional Search","8, 53","According to Slide 8, which strategies may be used for the two directions of Bidirectional Search?",["Breadth-First or Uniform-Cost Search","Depth-First only","Greedy Search only","Depth-Limited Search only"],0,"Slide 8 explicitly says Bidirectional Search can use BFS or UCS."),
+Q("Bidirectional Graph","54–55","In the educational diagram below, which numbered node is marked as the intersection where the two searches meet?",["4","8","10","9"],3,"The center node marked as the intersection in the diagram is node 9.","bi","The two search directions approach the same middle node; identify the labeled intersection."),
+Q("Repeated States","57","What can happen if repeated states are not detected?",["A linear problem can appear to become exponential","The branching factor always becomes zero","The goal test is automatically optimized","The path cost becomes negative"],0,"Slide 57 warns that failure to detect repeated states can turn a linear problem into an exponential one."),
+Q("Repeated States","57–58","What is a cycle (loop) in a search path?",["A path that reaches a new goal state","A path that returns to a state already on that same path","A queue sorted by path cost","A path with exactly one action"],1,"A cycle occurs when a sequence of actions returns to a previously visited state on the current path."),
+Q("Repeated States – Method 1","58","What does Method 1 do to reduce repeated-state problems?",["Stores every possible state globally","Uses a heuristic for each node","Avoids creating paths that contain cycles","Expands the deepest node only"],2,"Method 1 forbids paths containing cycles/loops."),
+Q("Repeated States – Method 2","58","What is the defining rule of Method 2?",["Never generate a state that has been generated before","Only avoid a cycle on the current path","Expand every repeated state twice","Ignore all states that are not goals"],0,"Method 2 tracks states already generated and never generates the same state again."),
+Q("Repeated States – Method 2","58","What is the main disadvantage of Method 2?",["It cannot detect repeated states","It is memory inefficient because it must track previously generated states","It always misses a shallow goal","It changes the transition model"],1,"Global repeated-state detection requires memory for the visited/generated-state set."),
+Q("8-Puzzle","58","According to Slide 58, how many arrangements are counted for the 8-puzzle's nine positions?",["8! = 40,320","3^9 = 19,683","9! = 362,880","2^9 = 512"],2,"The slide uses 9! = 362,880 possible arrangements for the nine positions."),
+Q("Tree Search vs Graph Search","60","What does a general TREE-SEARCH algorithm consider, according to Slide 60?",["Only the lowest-cost path","Only nodes that have never been expanded","Only goal states","All possible paths when searching for a solution"],3,"The summary says TREE-SEARCH considers all possible paths, whereas GRAPH-SEARCH avoids redundant paths."),
+Q("Tree Search vs Graph Search","60","What is the key difference of GRAPH-SEARCH in the chapter summary?",["It avoids consideration of redundant paths","It always uses LIFO","It ignores the goal test","It expands only the root"],0,"GRAPH-SEARCH avoids redundant paths, commonly by tracking previously reached states."),
+Q("Atomic States","60","When the slides say search algorithms treat states and actions as atomic, what does that mean?",["They must be represented as chemical atoms","The algorithms do not inspect the internal structure of states/actions in the basic search process","Every state contains exactly one action","Only atomic actions can be goals"],1,"Atomic means the search algorithm treats a state/action as a whole unit rather than analyzing its internal structure."),
+Q("Problem Formulation","60","Which list contains all five components of a problem formulation from Slide 60?",["Start, heuristic, depth, queue, goal","Root, children, tree, stack, time","Initial state, actions, transition model, goal test, path cost","Input, output, loop, variable, function"],2,"The five components are initial state, actions, transition model, goal test function, and path cost function."),
+Q("Problem Formulation","60","Which component specifies where the agent begins?",["Transition Model","Path Cost Function","Goal Test","Initial State"],3,"The initial state is the starting point of the problem."),
+Q("Problem Formulation","60","Which component describes the possible operations available to the agent?",["Set of Actions","Goal Test Function","Path Cost Function","State-space depth"],0,"Actions are the operations the agent can take from a state."),
+Q("Problem Formulation","60","Which component describes the result of applying an action to a state?",["Initial State","Transition Model","Goal Test","Branching Factor"],1,"The transition model describes the resulting state after an action is applied."),
+Q("Problem Formulation","60","Which component measures the cost of a path?",["Action Set","Initial State","Goal Test Function","Path Cost Function"],3,"The path cost function assigns the cumulative cost to a path."),
+Q("State Space & Solution","60","A path from the initial state to a goal state is called:",["A solution","A branching factor","A fringe","A transition model"],0,"The summary defines a solution as a path through the state space from initial state to goal state."),
+Q("Algorithm Selection","15, 43, 51","A search space is large, the solution depth is unknown, and memory is limited. Which uninformed method is generally preferred by the chapter?",["BFS","Iterative Deepening Search","Ordinary DFS with no safeguards","Uniform-Cost Search regardless of costs"],1,"Slide 51 recommends IDS for large search spaces when solution depth is unknown; it retains linear space."),
+Q("Mixed Concepts","15, 26, 43, 51","Which algorithm is optimal for general varying step costs by expanding the lowest g(n)?",["BFS","DFS","Uniform-Cost Search","Depth-Limited Search"],2,"UCS orders frontier paths by accumulated path cost g(n), and is optimal under the chapter's step-cost assumptions."),
+Q("Mixed Concepts","15, 55","Which search method can reduce the effective search depth from d to approximately d/2 by searching from both ends?",["Depth-First Search","Bidirectional Search","Uniform-Cost Search","Depth-Limited Search"],1,"Bidirectional Search grows from start and goal and aims to meet in the middle."),
+];
+
+let current=0;
+let answers=Array(questions.length).fill(null);
+let finished=false;
+const $=id=>document.getElementById(id);
+const letters=["A","B","C","D"];
+function stats(){
+  const answered=answers.filter(x=>x!==null).length;
+  const correct=answers.reduce((n,v,i)=>n+(v!==null&&v===questions[i].a?1:0),0);
+  const wrong=answered-correct;
+  const skipped=questions.length-answered;
+  const pct=n=>Math.round(n/questions.length*100);
+  $("answered").textContent=`${answered} / ${questions.length}`;
+  $("correct").textContent=`${correct} · ${pct(correct)}%`;
+  $("wrong").textContent=`${wrong} · ${pct(wrong)}%`;
+  $("unanswered").textContent=`${skipped} · ${pct(skipped)}%`;
+  $("progressText").textContent=`Question ${current+1} of ${questions.length}`;
+  $("progressPct").textContent=`${Math.round((current+1)/questions.length*100)}%`;
+  $("progress").style.width=`${(current+1)/questions.length*100}%`;
+}
+function imageHTML(key){
+  const d=diagrams[key]; if(!d)return "";
+  if(!d.url) return `<figure class="diagram">${d.fallback}<figcaption>Course-style weighted graph · edge costs are printed in red.</figcaption></figure>`;
+  return `<figure class="diagram"><img src="${d.url}" alt="${d.alt}" loading="lazy" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><div class="fallback" hidden>${d.fallback}</div><figcaption>Reference diagram · <a href="${d.source}" target="_blank" rel="noopener">Open original educational source</a>. If the remote image is unavailable, the built-in graph diagram appears.</figcaption></figure>`;
+}
+function render(){
+  const q=questions[current];
+  $("topic").textContent=q.topic;
+  $("qnumber").textContent=`Question ${current+1} / ${questions.length} · Slides ${q.slides}`;
+  $("question").textContent=q.q;
+  $("hint").textContent=q.hint||"";
+  $("diagram").innerHTML=q.img?imageHTML(q.img):"";
+  const chosen=answers[current];
+  const opts=$("options");opts.innerHTML="";
+  q.opts.forEach((op,i)=>{
+    const b=document.createElement("button");b.className="option";b.type="button";b.disabled=chosen!==null;
+    if(chosen!==null&&i===q.a)b.classList.add("correct");
+    if(chosen!==null&&i===chosen&&chosen!==q.a)b.classList.add("wrong");
+    const letter=document.createElement("span");letter.className="letter";letter.textContent=letters[i];
+    const txt=document.createElement("span");txt.textContent=op;
+    b.append(letter,txt);b.addEventListener("click",()=>selectAnswer(i));opts.appendChild(b);
+  });
+  const fb=$("feedback");
+  if(chosen===null){fb.className="feedback";fb.innerHTML="";}
+  else{
+    const good=chosen===q.a;fb.className=`feedback show ${good?"good":"bad"}`;
+    const title=document.createElement("div");title.className="feedback-title";title.textContent=good?"Correct answer ✓":"Not quite — the correct answer is " + letters[q.a] + ".";
+    const exp=document.createElement("div");exp.className="explanation";exp.textContent=q.why;
+    fb.replaceChildren(title,exp);
+  }
+  $("prev").disabled=current===0;
+  $("next").textContent=current===questions.length-1?"Finish & see results →":"Next question →";
+  stats();
+}
+function selectAnswer(i){if(answers[current]!==null)return;answers[current]=i;render();}
+function next(){if(current<questions.length-1){current++;render();}else showResults();}
+function previous(){if(current>0){current--;render();}}
+function showResults(){
+  finished=true;
+  const answered=answers.filter(x=>x!==null).length;
+  const correct=answers.reduce((n,v,i)=>n+(v!==null&&v===questions[i].a?1:0),0);
+  const wrong=answered-correct, skipped=questions.length-answered;
+  $("quiz").style.display="none";$("result").classList.add("show");
+  $("finalCorrect").textContent=`${correct} · ${Math.round(correct/questions.length*100)}%`;
+  $("finalWrong").textContent=`${wrong} · ${Math.round(wrong/questions.length*100)}%`;
+  $("finalSkipped").textContent=`${skipped} · ${Math.round(skipped/questions.length*100)}%`;
+  $("resultSummary").textContent=`You answered ${answered} of ${questions.length} questions. Your accuracy among answered questions is ${answered?Math.round(correct/answered*100):0}%. The percentages in the score cards are calculated out of all 100 questions.`;
+  const review=$("review");review.innerHTML="";
+  const missed=questions.map((q,i)=>({q,i})).filter(x=>answers[x.i]!==null&&answers[x.i]!==x.q.a);
+  if(!missed.length){review.innerHTML="<p><strong>Excellent!</strong> You have no incorrect answered questions.</p>";}
+  else{
+    const h=document.createElement("h3");h.textContent=`Review your ${missed.length} incorrect answer(s)`;review.appendChild(h);
+    missed.forEach(({q,i})=>{
+      const box=document.createElement("div");box.className="review-item";
+      const heading=document.createElement("div");heading.innerHTML=`<b>Q${i+1} · ${q.topic}</b>`;
+      const stem=document.createElement("p");stem.textContent=q.q;
+      const your=document.createElement("p");your.textContent=`Your answer: ${letters[answers[i]]}. ${q.opts[answers[i]]}`;
+      const right=document.createElement("p");right.textContent=`Correct answer: ${letters[q.a]}. ${q.opts[q.a]}`;right.style.color="#68e5ac";
+      const why=document.createElement("p");why.textContent=q.why;why.style.color="#c7d4e9";
+      box.append(heading,stem,your,right,why);review.appendChild(box);
+    });
+  }
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+$("next").addEventListener("click",next);
+$("prev").addEventListener("click",previous);
+$("reviewBtn").addEventListener("click",()=>$("review").scrollIntoView({behavior:"smooth"}));
+$("restart").addEventListener("click",()=>{current=0;answers=Array(questions.length).fill(null);finished=false;$("result").classList.remove("show");$("quiz").style.display="block";render();window.scrollTo({top:0,behavior:"smooth"});});
+if(questions.length!==100){document.querySelector(".hero p").textContent=`Question bank loaded: ${questions.length} questions (expected 100).`;}
+render();
+</script>
+</body>
+</html>
